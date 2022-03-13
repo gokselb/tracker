@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "track-the-shit": {
+      "hosting": {
+        "track-the-shit": [
+          "track-the-shit"
+        ]
+      }
+    }
+  }
+}
