@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <mat-icon>whatshot</mat-icon>
+  <span class="ml-2">Track This Shit</span>
+  <span class="spacer"></span>
+  <span class="person"> Hi, {{ (this.currentUser | async)?.name }}! </span>
+  <button mat-icon-button (click)="this.logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<p>dashboard works!</p>

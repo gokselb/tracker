@@ -1,0 +1,54 @@
+<div class="align-items-center d-flex h-100 justify-content-center">
+  <mat-card class="col-md-6">
+    <mat-card-title>Sign Up</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field class="w-100">
+          <input
+            type="text"
+            matInput
+            placeholder="Name"
+            formControlName="name"
+          />
+        <mat-error *ngIf="this.form.controls.name.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+        <mat-form-field class="w-100">
+          <input
+            type="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+        <mat-error *ngIf="this.form.controls.email.hasError('email') && !this.form.controls.email.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="this.form.controls.email.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+          />
+          <mat-error *ngIf="this.form.controls.password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button d-flex">
+          <button type="button" routerLink="/login" mat-button>Go to login</button>
+          <button [disabled]="!this.form.valid" type="submit" class="flex-grow-1" color="primary" mat-button>Sign up</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

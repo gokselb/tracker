@@ -16,10 +16,13 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@tts/models": ["src/app/models"],
+      "@tts/models/*": ["src/app/models/*"],
+      "@tts/services": ["src/app/services"],
+      "@tts/services/*": ["src/app/services/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
