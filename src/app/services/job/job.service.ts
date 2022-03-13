@@ -11,13 +11,21 @@ import { AuthenticationService } from '../authentication';
   providedIn: 'root',
 })
 export class JobService {
+  private currentUid?: string;
   private get collection() {
-    return this.db.collection<Job>('jobs');
+    return this.db.collection<Job>('jobs', (ref) => {
+      return ref.where('user', '==', this.currentUid);
+    });
   }
   constructor(
     private db: AngularFirestore,
     private authService: AuthenticationService
-  ) {}
+  ) {
+    this.currentUid = this.authService.currentUserVal?.uid;
+    this.authService.currentUser.userData.subscribe((user) => {
+      this.currentUid = user?.uid;
+    });
+  }
 
   public create(data: Job) {
     data.user = this.authService.currentUserVal?.uid;
