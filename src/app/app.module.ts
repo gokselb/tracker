@@ -18,6 +18,7 @@ import { AddJobComponent } from './dashboard/add-job/add-job.component';
 
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
+import { SETTINGS as FIRESTORE_SETTINGS } from '@angular/fire/firestore';
 
 registerLocaleData(localeTr);
 @NgModule({
@@ -39,7 +40,13 @@ registerLocaleData(localeTr);
     AngularFirestoreModule,
     [...materialModules],
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'tr' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'tr' },
+    {
+      provide: FIRESTORE_SETTINGS,
+      useValue: { ignoreUndefinedProperties: true, merge: true },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

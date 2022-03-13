@@ -14,12 +14,14 @@ export class AuthenticationService {
     userData: Observable<firebase.User | null>;
     otherData?:  Subject<User>;
   };
+  public currentUserVal!: firebase.User | null;
   constructor(
     private fireAuth: AngularFireAuth,
     private userService: UserService
   ) {
     this.currentUser = { userData: fireAuth.authState, otherData: new Subject() };
     this.currentUser.userData.subscribe((result) => {
+      this.currentUserVal = result;
       this.userService.get(result?.uid).subscribe((result) => {
         this.currentUser.otherData?.next(result);
       });

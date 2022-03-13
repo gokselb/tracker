@@ -54,11 +54,11 @@ export class TaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       console.log(result);
-      const job: Job = result;
-      job.startDate = this.utils.convertToTimestamp(result.startDate);
-      job.endDate = this.utils.convertToTimestamp(result.endDate);
-      job.payDate = this.utils.convertToTimestamp(result.payDate);
       if (result) {
+        const job: Job = result;
+        job.startDate = this.utils.convertToTimestamp(result.startDate);
+        job.endDate = this.utils.convertToTimestamp(result.endDate);
+        job.payDate = this.utils.convertToTimestamp(result.payDate);
         this.jobService.create(result);
       }
     });

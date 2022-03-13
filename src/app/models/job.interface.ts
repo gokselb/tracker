@@ -6,15 +6,15 @@ export interface Job {
   type: string;
   jobName: string;
   customer: string;
-  startDate: firebase.firestore.Timestamp;
-  endDate: firebase.firestore.Timestamp;
+  startDate?: firebase.firestore.Timestamp;
+  endDate?: firebase.firestore.Timestamp;
   country: string;
   city: string;
   secretary: string;
   interpreters: string;
   total: number;
   remaining: number;
-  payDate: firebase.firestore.Timestamp;
+  payDate?: firebase.firestore.Timestamp;
   currency: string;
-  user: string;
+  user?: string;
 }

@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
-  public convertToTimestamp(date: Date): firebase.firestore.Timestamp {
-    return firebase.firestore.Timestamp.fromDate(date);
+  public convertToTimestamp(date: Date): firebase.firestore.Timestamp | undefined {
+    return date ? firebase.firestore.Timestamp.fromDate(date) : undefined;
   }
 }

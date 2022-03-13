@@ -15,10 +15,14 @@ export class AddJobComponent implements OnInit {
 
   public form: FormGroup;
 
-  public filteredOptions: { [key: string]: Observable<string[]> } = {};
-  constructor(public dialogRef: MatDialogRef<AddJobComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: {allData: Job[]},) {
-      this.allData = data.allData;
+  public filteredOptions: {
+    [key: string]: Observable<(string | undefined)[]>;
+  } = {};
+  constructor(
+    public dialogRef: MatDialogRef<AddJobComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { allData: Job[] }
+  ) {
+    this.allData = data.allData;
     this.form = new FormGroup({
       id: new FormControl(''),
       invoiceNo: new FormControl(''),
@@ -52,16 +56,16 @@ export class AddJobComponent implements OnInit {
     };
   }
 
-  private _filter(value: string, key: keyof Job): string[] {
+  private _filter(value: string, key: keyof Job): (string | undefined)[] {
     const filterValue = value.toLowerCase();
 
     return this.getDataBy(key).filter((option) =>
-      option.toLowerCase().includes(filterValue)
+      option?.toLowerCase().includes(filterValue)
     );
   }
 
   public getDataBy(field: keyof Job) {
-    return this.allData.map((val) => val[field].toString());
+    return this.allData.map((val) => val[field]?.toString());
   }
 
   public submit() {

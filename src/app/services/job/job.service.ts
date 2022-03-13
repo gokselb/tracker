@@ -5,6 +5,7 @@ import { Job, SignUp, User } from '@tts/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/app';
+import { AuthenticationService } from '../authentication';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,13 @@ export class JobService {
   private get collection() {
     return this.db.collection<Job>('jobs');
   }
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private authService: AuthenticationService
+  ) {}
 
   public create(data: Job) {
+    data.user = this.authService.currentUserVal?.uid;
     return this.collection.add(data);
   }
 
