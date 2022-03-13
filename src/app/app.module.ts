@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,9 +13,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
+import { TaskListComponent } from './dashboard/task-list/task-list.component';
+import { AddJobComponent } from './dashboard/add-job/add-job.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeTr from '@angular/common/locales/tr';
+
+registerLocaleData(localeTr);
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    RegisterComponent,
+    TaskListComponent,
+    AddJobComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,7 +39,7 @@ import { RegisterComponent } from './register/register.component';
     AngularFirestoreModule,
     [...materialModules],
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'tr' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

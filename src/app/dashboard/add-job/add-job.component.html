@@ -1,0 +1,146 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1 mat-dialog-title>Add Job</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Invoice No"
+        formControlName="invoiceNo"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Type"
+        formControlName="type"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.type | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Job Name"
+        formControlName="jobName"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Customer"
+        formControlName="customer"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          formControlName="startDate"
+          placeholder="Start date"
+        />
+        <input matEndDate formControlName="endDate" placeholder="End date" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <mat-error *ngIf="form.controls.startDate.hasError('matStartDateInvalid')"
+        >Invalid start date</mat-error
+      >
+      <mat-error *ngIf="form.controls.endDate.hasError('matEndDateInvalid')"
+        >Invalid end date</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Country"
+        formControlName="country"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input type="text" matInput placeholder="City" formControlName="city" />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Secretary"
+        formControlName="secretary"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Interpreters"
+        formControlName="interpreters"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input type="text" matInput placeholder="Total" formControlName="total" />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Remaining"
+        formControlName="remaining"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        [matDatepicker]="pickerForDue"
+        type="text"
+        matInput
+        placeholder="Pay Due"
+        formControlName="payDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="pickerForDue"></mat-datepicker-toggle>
+      <mat-datepicker #pickerForDue></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Currency"
+        formControlName="currency"
+      />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <div class="flex-grow-1"></div>
+    <button
+      [disabled]="!this.form.valid"
+      type="submit"
+      color="primary"
+      mat-button
+    >
+      Save
+    </button>
+  </div>
+</form>
