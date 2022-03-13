@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/track-the-shit",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
