@@ -1,0 +1,35 @@
+.table-container {
+  height: calc(100vh - 200px);
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 800px;
+  td {
+    padding: 5px 5px;
+  }
+}
+
+td.mat-column-options {
+  width: 20px;
+  padding-right: 8px;
+}
+
+
+.mat-column-startDate {
+  width: 100px;
+}
+
+th.mat-column-invoiceNo, td.mat-column-invoiceNo {
+  padding-left: 8px;
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}

@@ -37,7 +37,6 @@ export class AddJobComponent implements OnInit {
       interpreters: new FormControl(''),
       total: new FormControl(''),
       remaining: new FormControl(''),
-      payDate: new FormControl(''),
       currency: new FormControl(''),
       user: new FormControl(''),
     });
@@ -48,12 +47,23 @@ export class AddJobComponent implements OnInit {
   }
 
   public setFilteredOptions() {
-    this.filteredOptions = {
-      type: this.form.controls.type.valueChanges.pipe(
+    let getObservable = (field: keyof Job) => {
+      return this.form.controls[field].valueChanges.pipe(
         startWith(''),
-        map((value) => this._filter(value, 'type'))
-      ),
+        map((value) => this._filter(value, field))
+      );
     };
+    const fields: (keyof Job)[] = [
+      'type',
+      'jobName',
+      'customer',
+      'country',
+      'city',
+      'secretary',
+    ];
+    fields.forEach((field) => {
+      this.filteredOptions[field] = getObservable(field);
+    });
   }
 
   private _filter(value: string, key: keyof Job): (string | undefined)[] {
@@ -65,7 +75,9 @@ export class AddJobComponent implements OnInit {
   }
 
   public getDataBy(field: keyof Job) {
-    return this.allData.map((val) => val[field]?.toString());
+    return this.allData
+      .map((val) => val[field]?.toString())
+      .filter((val) => !!val);
   }
 
   public submit() {

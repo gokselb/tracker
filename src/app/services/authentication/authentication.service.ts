@@ -24,6 +24,7 @@ export class AuthenticationService {
       otherData: new Subject(),
     };
     this.currentUser.userData.subscribe((result) => {
+      console.log('Auth service', result)
       this.currentUserVal = result;
       if (result) {
         this.userService.get(result?.uid).subscribe((result) => {

@@ -16,9 +16,9 @@
         matInput
         placeholder="Type"
         formControlName="type"
-        [matAutocomplete]="auto"
+        [matAutocomplete]="autoType"
       />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-autocomplete autoActiveFirstOption #autoType="matAutocomplete">
         <mat-option
           *ngFor="let option of filteredOptions.type | async"
           [value]="option"
@@ -34,7 +34,16 @@
         matInput
         placeholder="Job Name"
         formControlName="jobName"
+        [matAutocomplete]="autoJobName"
       />
+      <mat-autocomplete autoActiveFirstOption #autoJobName="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.jobName | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -43,7 +52,16 @@
         matInput
         placeholder="Customer"
         formControlName="customer"
+        [matAutocomplete]="autoJobName"
       />
+      <mat-autocomplete autoActiveFirstOption #autoCustomer="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.customer | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -52,8 +70,14 @@
           matStartDate
           formControlName="startDate"
           placeholder="Start date"
+          (click)="picker.open()"
         />
-        <input matEndDate formControlName="endDate" placeholder="End date" />
+        <input
+          matEndDate
+          formControlName="endDate"
+          placeholder="End date"
+          (click)="picker.open()"
+        />
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
@@ -72,11 +96,34 @@
         matInput
         placeholder="Country"
         formControlName="country"
+        [matAutocomplete]="autoCountry"
       />
+      <mat-autocomplete autoActiveFirstOption #autoCountry="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.country | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <input type="text" matInput placeholder="City" formControlName="city" />
+      <input
+        type="text"
+        matInput
+        placeholder="City"
+        formControlName="city"
+        [matAutocomplete]="autoCity"
+      />
+      <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.city | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -85,7 +132,16 @@
         matInput
         placeholder="Secretary"
         formControlName="secretary"
+        [matAutocomplete]="autoSecretary"
       />
+      <mat-autocomplete autoActiveFirstOption #autoSecretary="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.secretary | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -108,18 +164,6 @@
         placeholder="Remaining"
         formControlName="remaining"
       />
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input
-        [matDatepicker]="pickerForDue"
-        type="text"
-        matInput
-        placeholder="Pay Due"
-        formControlName="payDate"
-      />
-      <mat-datepicker-toggle matSuffix [for]="pickerForDue"></mat-datepicker-toggle>
-      <mat-datepicker #pickerForDue></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="w-100">

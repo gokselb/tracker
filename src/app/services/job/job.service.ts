@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Job, SignUp, User } from '@tts/models';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AuthenticationService } from '../authentication';
 
@@ -12,9 +12,11 @@ import { AuthenticationService } from '../authentication';
 })
 export class JobService {
   private currentUid?: string;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   private get collection() {
     return this.db.collection<Job>('jobs', (ref) => {
-      return ref.where('user', '==', this.currentUid);
+      console.log('userId', this.currentUid);
+      return ref.where('user', '==', this.currentUid ?? 1);
     });
   }
   constructor(
@@ -24,6 +26,10 @@ export class JobService {
     this.currentUid = this.authService.currentUserVal?.uid;
     this.authService.currentUser.userData.subscribe((user) => {
       this.currentUid = user?.uid;
+      if (!this.currentUid) {
+        this.destroyed$.next(true);
+      }
+      console.log('userId', this.currentUid);
     });
   }
 
@@ -39,11 +45,19 @@ export class JobService {
       .pipe(
         map((res) => {
           return res.data();
-        })
+        }),
+        takeUntil(this.destroyed$)
       );
   }
 
   public getAll() {
-    return this.collection.valueChanges({ idField: 'id' });
+    console.log('fetching all');
+    return this.collection.valueChanges({ idField: 'id' }).pipe(
+      map((val) => {
+        console.log('fetching all');
+        return val;
+      }),
+      takeUntil(this.destroyed$)
+    );
   }
 }
