@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Job } from '@tts/models';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { distinct, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-job',
@@ -50,7 +50,11 @@ export class AddJobComponent implements OnInit {
     let getObservable = (field: keyof Job) => {
       return this.form.controls[field].valueChanges.pipe(
         startWith(''),
-        map((value) => this._filter(value, field))
+        map((value) => {
+          let result = this._filter(value, field);
+          console.log(result);
+          return [...new Set(result)];
+        })
       );
     };
     const fields: (keyof Job)[] = [
