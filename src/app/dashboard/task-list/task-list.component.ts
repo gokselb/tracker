@@ -23,14 +23,14 @@ export class TaskListComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = [
     'invoiceNo',
     'type',
-    'jobName',
-    'customer',
+    'company',
+    'client',
+    'assignment',
     'startDate',
     'place',
-    'secretary',
     'interpreters',
-    'total',
-    'remaining',
+    'amount',
+    'isPaid',
     'options'
   ];
 
@@ -76,6 +76,12 @@ export class TaskListComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  public updateValue(job: Job): void {
+    this.jobService.update(job);
+  }
+
+  // TODO: To implement
   public removeData() {}
   /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {

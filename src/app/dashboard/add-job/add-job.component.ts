@@ -27,16 +27,14 @@ export class AddJobComponent implements OnInit {
       id: new FormControl(''),
       invoiceNo: new FormControl(''),
       type: new FormControl('', [Validators.required]),
-      jobName: new FormControl('', [Validators.required]),
-      customer: new FormControl('', [Validators.required]),
+      company: new FormControl('', [Validators.required]),
+      client: new FormControl('', [Validators.required]),
+      assignment: new FormControl('', [Validators.required]),
       startDate: new FormControl(''),
       endDate: new FormControl(''),
-      country: new FormControl(''),
-      city: new FormControl(''),
-      secretary: new FormControl(''),
+      place: new FormControl(''),
       interpreters: new FormControl(''),
-      total: new FormControl(''),
-      remaining: new FormControl(''),
+      amount: new FormControl(''),
       currency: new FormControl(''),
       user: new FormControl(''),
     });
@@ -59,11 +57,10 @@ export class AddJobComponent implements OnInit {
     };
     const fields: (keyof Job)[] = [
       'type',
-      'jobName',
-      'customer',
-      'country',
-      'city',
-      'secretary',
+      'assignment',
+      'client',
+      'company',
+      'place',
     ];
     fields.forEach((field) => {
       this.filteredOptions[field] = getObservable(field);

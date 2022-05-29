@@ -32,13 +32,13 @@
       <input
         type="text"
         matInput
-        placeholder="Job Name"
-        formControlName="jobName"
-        [matAutocomplete]="autoJobName"
+        placeholder="Assignment"
+        formControlName="assignment"
+        [matAutocomplete]="autoAssignment"
       />
-      <mat-autocomplete autoActiveFirstOption #autoJobName="matAutocomplete">
+      <mat-autocomplete autoActiveFirstOption #autoAssignment="matAutocomplete">
         <mat-option
-          *ngFor="let option of filteredOptions.jobName | async"
+          *ngFor="let option of filteredOptions.assignment | async"
           [value]="option"
         >
           {{ option }}
@@ -50,13 +50,31 @@
       <input
         type="text"
         matInput
-        placeholder="Customer"
-        formControlName="customer"
-        [matAutocomplete]="autoJobName"
+        placeholder="Client"
+        formControlName="client"
+        [matAutocomplete]="autoClient"
       />
-      <mat-autocomplete autoActiveFirstOption #autoCustomer="matAutocomplete">
+      <mat-autocomplete autoActiveFirstOption #autoClient="matAutocomplete">
         <mat-option
-          *ngFor="let option of filteredOptions.customer | async"
+          *ngFor="let option of filteredOptions.client | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <input
+        type="text"
+        matInput
+        placeholder="Company"
+        formControlName="company"
+        [matAutocomplete]="autoCompany"
+      />
+      <mat-autocomplete autoActiveFirstOption #autoCompany="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions.company | async"
           [value]="option"
         >
           {{ option }}
@@ -94,49 +112,13 @@
       <input
         type="text"
         matInput
-        placeholder="Country"
-        formControlName="country"
-        [matAutocomplete]="autoCountry"
+        placeholder="Place"
+        formControlName="place"
+        [matAutocomplete]="autoPlace"
       />
-      <mat-autocomplete autoActiveFirstOption #autoCountry="matAutocomplete">
+      <mat-autocomplete autoActiveFirstOption #autoPlace="matAutocomplete">
         <mat-option
-          *ngFor="let option of filteredOptions.country | async"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input
-        type="text"
-        matInput
-        placeholder="City"
-        formControlName="city"
-        [matAutocomplete]="autoCity"
-      />
-      <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions.city | async"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input
-        type="text"
-        matInput
-        placeholder="Secretary"
-        formControlName="secretary"
-        [matAutocomplete]="autoSecretary"
-      />
-      <mat-autocomplete autoActiveFirstOption #autoSecretary="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions.secretary | async"
+          *ngFor="let option of filteredOptions.place | async"
           [value]="option"
         >
           {{ option }}
@@ -154,16 +136,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <input type="text" matInput placeholder="Total" formControlName="total" />
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <input
-        type="text"
-        matInput
-        placeholder="Remaining"
-        formControlName="remaining"
-      />
+      <input type="text" matInput placeholder="Amount" formControlName="amount" />
     </mat-form-field>
 
     <mat-form-field class="w-100">

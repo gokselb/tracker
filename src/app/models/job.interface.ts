@@ -4,17 +4,16 @@ export interface Job {
   id: string;
   invoiceNo: number;
   type: string;
-  jobName: string;
-  customer: string;
+  assignment: string;
+  company: string;
+  client: string;
   startDate?: firebase.firestore.Timestamp;
   endDate?: firebase.firestore.Timestamp;
-  country: string;
-  city: string;
-  secretary: string;
+  place: string;
   interpreters: string;
-  total: number;
-  remaining: number;
+  amount: number;
   payDate?: firebase.firestore.Timestamp;
   currency: string;
   user?: string;
+  isPaid?: boolean;
 }

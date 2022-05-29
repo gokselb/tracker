@@ -5,6 +5,11 @@
   overflow: auto;
 }
 
+table.mat-table.cdk-table.mat-sort.w-100 {
+  border-collapse: unset;
+  border-spacing: 0px 6px;
+}
+
 table {
   width: 800px;
   td {
@@ -17,12 +22,12 @@ td.mat-column-options {
   padding-right: 8px;
 }
 
-
 .mat-column-startDate {
   width: 100px;
 }
 
-th.mat-column-invoiceNo, td.mat-column-invoiceNo {
+th.mat-column-invoiceNo,
+td.mat-column-invoiceNo {
   padding-left: 8px;
 }
 
@@ -32,4 +37,20 @@ th.mat-column-invoiceNo, td.mat-column-invoiceNo {
 
 .mat-table-sticky-border-elem-left {
   border-right: 1px solid #e0e0e0;
+}
+
+td.mat-cell.cdk-cell.cdk-column-invoiceNo.mat-column-invoiceNo.ng-star-inserted.mat-table-sticky.mat-table-sticky-border-elem-left {
+  border-radius: 10px 0px 0px 10px;
+}
+
+td.mat-cell.cdk-cell.cdk-column-options.mat-column-options.ng-star-inserted.mat-table-sticky.mat-table-sticky-border-elem-right {
+  border-radius: 0px 10px 10px 0px;
+}
+
+td.mat-cell {
+  padding: 15px !important;
+}
+
+th.mat-header-cell.cdk-header-cell {
+  padding: 15px;
 }

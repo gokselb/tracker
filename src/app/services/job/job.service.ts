@@ -33,6 +33,10 @@ export class JobService {
     });
   }
 
+  public update(job: Job) {
+    this.collection.doc(job.id).update(job);
+  }
+
   public create(data: Job) {
     data.user = this.authService.currentUserVal?.uid;
     return this.collection.add(data);
