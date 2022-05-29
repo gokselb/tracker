@@ -81,8 +81,10 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     this.jobService.update(job);
   }
 
-  // TODO: To implement
-  public removeData() {}
+  public removeJob(job: Job): void {
+    this.jobService.remove(job.id);
+  }
+
   /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {
     // This example uses English messages. If your application supports

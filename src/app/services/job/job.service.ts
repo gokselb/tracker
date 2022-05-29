@@ -37,6 +37,10 @@ export class JobService {
     this.collection.doc(job.id).update(job);
   }
 
+  public remove(id: string) {
+    this.collection.doc(id).delete();
+  }
+
   public create(data: Job) {
     data.user = this.authService.currentUserVal?.uid;
     return this.collection.add(data);
