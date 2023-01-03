@@ -136,16 +136,23 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <input type="text" matInput placeholder="Amount" formControlName="amount" />
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
       <input
         type="text"
         matInput
-        placeholder="Currency"
-        formControlName="currency"
+        placeholder="Amount"
+        formControlName="amount"
       />
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Currency</mat-label>
+      <mat-select formControlName="currency">
+        <mat-option
+          *ngFor="let currency of this.currencies"
+          [value]="currency.code"
+          >{{ currency.name }} - ({{ currency.sign }})</mat-option
+        >
+      </mat-select>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

@@ -5,6 +5,8 @@ import { Job } from '@tts/models';
 import { Observable } from 'rxjs';
 import { distinct, map, startWith } from 'rxjs/operators';
 import { UtilsService } from '@tts/services/utils.service';
+import { CurrencyService } from '@tts/services/currency.service';
+import { Currency } from '@tts/models/currency.model';
 
 @Component({
   selector: 'app-add-job',
@@ -19,11 +21,15 @@ export class AddJobComponent implements OnInit {
   public filteredOptions: {
     [key: string]: Observable<(string | undefined)[]>;
   } = {};
+
+  public currencies: Currency[];
   constructor(
     public dialogRef: MatDialogRef<AddJobComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { allData: Job[]; selectedJob?: Job },
-    public utils: UtilsService
+    public utils: UtilsService,
+    public currencyService: CurrencyService
   ) {
+    this.currencies = this.currencyService.currencies;
     this.allData = data.allData;
     this.form = new FormGroup({
       id: new FormControl(''),
