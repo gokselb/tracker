@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     'interpreters',
     'amount',
     'isPaid',
-    'options'
+    'options',
   ];
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -83,6 +83,24 @@ export class TaskListComponent implements OnInit, AfterViewInit {
 
   public removeJob(job: Job): void {
     this.jobService.remove(job.id);
+  }
+
+  public editJob(job: Job): void {
+    const dialogRef = this.dialog.open<AddJobComponent>(AddJobComponent, {
+      data: { allData: this.dataSource.data, selectedJob: job },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if (result) {
+        const updatedJob: Job = result;
+        updatedJob.startDate = this.utils.convertToTimestamp(result.startDate);
+        updatedJob.endDate = this.utils.convertToTimestamp(result.endDate);
+        updatedJob.payDate = this.utils.convertToTimestamp(result.payDate);
+        this.jobService.update(updatedJob);
+      }
+    });
   }
 
   /** Announce the change in sort state for assistive technology. */

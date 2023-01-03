@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Job } from '@tts/models';
 import { Observable } from 'rxjs';
 import { distinct, map, startWith } from 'rxjs/operators';
+import { UtilsService } from '@tts/services/utils.service';
 
 @Component({
   selector: 'app-add-job',
@@ -20,7 +21,8 @@ export class AddJobComponent implements OnInit {
   } = {};
   constructor(
     public dialogRef: MatDialogRef<AddJobComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { allData: Job[] }
+    @Inject(MAT_DIALOG_DATA) public data: { allData: Job[]; selectedJob?: Job },
+    public utils: UtilsService
   ) {
     this.allData = data.allData;
     this.form = new FormGroup({
@@ -38,6 +40,13 @@ export class AddJobComponent implements OnInit {
       currency: new FormControl(''),
       user: new FormControl(''),
     });
+    if (data.selectedJob) {
+      const job = { ...data.selectedJob };
+      (job as any).startDate = this.utils.convertToDate(job.startDate);
+      (job as any).endDate = this.utils.convertToDate(job.endDate);
+      (job as any).payDate = this.utils.convertToDate(job.payDate);
+      this.form.patchValue(job);
+    }
   }
 
   ngOnInit(): void {
