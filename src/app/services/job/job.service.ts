@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AuthenticationService } from '../authentication';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,9 @@ export class JobService {
   private get collection() {
     return this.db.collection<Job>('jobs', (ref) => {
       console.log('userId', this.currentUid);
+      if (this.currentUid === environment.masterUser) {
+        return ref;
+      }
       return ref.where('user', '==', this.currentUid ?? 1);
     });
   }
